@@ -1,0 +1,31 @@
+# quantumatk
+
+[Back to application catalog](../app_catalog.md)
+
+## Description
+
+QuantumATK is a software platform for atomic-scale modeling of materials and devices.
+
+## Homepage
+
+[https://www.synopsys.com/silicon/quantumatk.html](https://www.synopsys.com/silicon/quantumatk.html)
+
+## Available Versions on RCAC Clusters
+
+|Cluster|Versions|
+|---|---|
+**BELL**|2020.09
+**GAUTSCHI**|2026.03
+**GILBRETH**|2026.03
+**NEGISHI**|2020.09, 2026.03
+
+## Module
+
+You can load the module by:
+
+```bash
+module load quantumatk
+```
+
+!!! note "Note for using `quantumatk`"
+    Run `module spider quantumatk` beforehand to check if this version requires any prerequisite modules.

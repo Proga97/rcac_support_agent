@@ -1,0 +1,496 @@
+site_name: RCAC Documentation
+site_description: Official RCAC documentation website.
+site_url: https://docs.rcac.purdue.edu
+exclude_docs: |
+  snippets/
+repo_url: https://github.com/PurdueRCAC/RCAC-Docs
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  logo: assets/purdue.png
+  favicon: assets/purdue_favicon.png
+  custom_dir: overrides
+  font:
+    text: Roboto
+    code: Consolas
+  features:
+    - navigation.indexes
+    - navigation.top
+    - navigation.footer
+    - navigation.sections
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.tabs.link
+    - content.action.view
+    - content.action.edit
+  palette:
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to automatic mode
+
+extra_css:
+  - stylesheets/extra.css
+  - stylesheets/outage-widget.css
+  - stylesheets/workshop-banner.css
+extra_javascript:
+  - assets/js/tablefilter.js
+  - assets/js/init-tablefilter.js
+  - assets/js/breadcrumbs.js
+  - assets/js/external-links.js
+  - assets/js/outage-widget.js
+  - assets/js/workshop-banner.js
+
+plugins:
+  - search
+  - blog:
+      archive_date_format: MMMM yyyy
+      post_date_format: long
+      categories_allowed:
+        - Announcements
+        - Anvil
+        - Gautschi
+        - Software
+        - Slurm
+        - Workflows
+        - Life Sciences
+      pagination_per_page: 5
+      pagination_if_single_page: true
+  - tags:
+      enabled: true
+  - git-revision-date-localized:
+      enabled: !ENV [CI, false]
+      enable_creation_date: true
+      exclude:
+      # Do not include timestamp in the following pages
+        - index.md
+        - contact.md
+        - blog/*
+        - software/*
+        - datasets/*
+  - rss:
+      match_path: blog/posts/.*
+      date_from_meta:
+        as_creation: date
+      categories:
+        - categories
+        - tags
+      image: https://docs.rcac.purdue.edu/assets/purdue.png
+  - macros
+
+nav:
+  - HPC User Guides:
+    - Anvil:
+      - userguides/anvil/index.md
+      - About:
+        - Overview: userguides/anvil/overview.md
+        - System Architecture: userguides/anvil/architecture.md
+      - Access to Anvil: userguides/anvil/access.md
+      - Getting Started: userguides/anvil/getting-started.md
+      - Job Submission: userguides/anvil/jobs.md
+      - File Management: userguides/anvil/file_management.md
+      - Anvil Software: userguides/anvil/anvil-software.md
+      - Using AI Agents: userguides/anvil/using_ai_agents.md
+      - Frequently Asked Questions: userguides/anvil/faqs.md
+      - Anvil Composable Subsystem:
+        - userguides/anvil/composable/index.md
+        - Getting Started: userguides/anvil/composable/getting-started.md
+        - Concepts: userguides/anvil/composable/concepts.md
+        - Examples: userguides/anvil/composable/examples.md
+      - Anvil Object Storage:
+        - userguides/anvil/objectstorage/index.md
+        - Getting Started: userguides/anvil/objectstorage/getting-started.md
+        - Object Storage Concepts: userguides/anvil/objectstorage/concepts.md
+        - Access: userguides/anvil/objectstorage/access.md
+        - User Tools: userguides/anvil/objectstorage/usertools.md
+        - Security and Access Control: userguides/anvil/objectstorage/acl.md
+      - AnvilGPT (LLM):
+        - userguides/anvil/anvilgpt/index.md
+        - Chat Interface: userguides/anvil/anvilgpt/chat-interface.md
+        - Workspace: userguides/anvil/anvilgpt/workspace.md
+        - Hosted Models: userguides/anvil/anvilgpt/models.md
+        - Groups and Sharing: userguides/anvil/anvilgpt/groups.md
+        - API: userguides/anvil/anvilgpt/api.md
+        - Tool Calling: userguides/anvil/anvilgpt/tool-calling.md
+        - MCP Integration: userguides/anvil/anvilgpt/mcp-integration.md
+      - Anvil Notebook: userguides/anvil/notebook.md
+      - Key Policies: userguides/anvil/policies.md
+    - Bell:
+      - userguides/bell/index.md
+      - Bell Overview: userguides/bell/overview.md
+      - Biography of Bell: userguides/bell/biography.md
+      - Accounts: userguides/bell/accounts.md
+      - Software: userguides/bell/software.md
+      - Running Jobs: userguides/bell/run_jobs/index.md
+      - File Storage and Transfer: userguides/bell/storage.md
+      - Gateway (Open OnDemand): userguides/bell/gateway.md
+      - Compiling Source Code: userguides/bell/compile.md
+      - Frequently Asked Questions: userguides/bell/faqs.md
+    - Gautschi:
+      - userguides/gautschi/index.md
+      - Gautschi Overview: userguides/gautschi/overview.md
+      - Biography of Gautschi: userguides/gautschi/biography.md
+      - Accounts: userguides/gautschi/accounts.md
+      - Software: userguides/gautschi/software.md
+      - Running Jobs: userguides/gautschi/run_jobs/index.md
+      - File Storage and Transfer: userguides/gautschi/storage.md
+      - Gateway (Open OnDemand): userguides/gautschi/gateway.md
+      - Compiling Source Code: userguides/gautschi/compile.md
+      - Using AI Agents: userguides/gautschi/using_ai_agents.md
+      - Frequently Asked Questions: userguides/gautschi/faqs.md
+    - Gilbreth:
+      - userguides/gilbreth/index.md
+      - Gilbreth Overview: userguides/gilbreth/overview.md
+      - Biography of Gilbreth: userguides/gilbreth/biography.md
+      - Accounts: userguides/gilbreth/accounts.md
+      - Software: userguides/gilbreth/software.md
+      - Running Jobs: userguides/gilbreth/run_jobs/index.md
+      - File Storage and Transfer: userguides/gilbreth/storage.md
+      - Gateway (Open OnDemand): userguides/gilbreth/gateway.md
+      - Compiling Source Code: userguides/gilbreth/compile.md
+      - Using AI Agents: userguides/gilbreth/using_ai_agents.md
+      - Frequently Asked Questions: userguides/gilbreth/faqs.md
+    - Negishi:
+      - userguides/negishi/index.md
+      - Negishi Overview: userguides/negishi/overview.md
+      - Biography of Negishi: userguides/negishi/biography.md
+      - Accounts: userguides/negishi/accounts.md
+      - Software: userguides/negishi/software.md
+      - Running Jobs: userguides/negishi/run_jobs/index.md
+      - File Storage and Transfer: userguides/negishi/storage.md
+      - Gateway (Open OnDemand): userguides/negishi/gateway.md
+      - Compiling Source Code: userguides/negishi/compile.md
+      - Using AI Agents: userguides/negishi/using_ai_agents.md
+      - Frequently Asked Questions: userguides/negishi/faqs.md
+    - Scholar: 
+      - userguides/scholar/index.md
+      - Scholar Overview: userguides/scholar/overview.md
+      - Accounts: userguides/scholar/accounts.md
+      - Software: userguides/scholar/software.md
+      - Running Jobs: userguides/scholar/run_jobs/index.md
+      - Scholar Spark Nodes: userguides/scholar/scholar-spark.md
+      - File Storage and Transfer: userguides/scholar/storage.md
+      - Gateway (Open OnDemand): userguides/scholar/gateway.md
+      - Compiling Source Code: userguides/scholar/compile.md
+      - Using AI Agents: userguides/scholar/using_ai_agents.md
+      - Frequently Asked Questions: userguides/scholar/faqs.md
+    - Geddes:
+      - userguides/geddes/index.md
+      - Overview of Geddes: userguides/geddes/overview.md
+      - Biography of Lanelle Geddes: userguides/geddes/biography.md
+      - Concepts: userguides/geddes/concepts.md
+      - Access: userguides/geddes/access.md
+      - Registry: 
+        - Geddes 1 Registry: userguides/geddes/registry.md
+        - Geddes 2 Registry: userguides/geddes/registry2.md
+      - Workloads: userguides/geddes/workloads.md
+      - Services: userguides/geddes/services.md
+      - Storage: userguides/geddes/storage.md
+      - Examples:
+        - userguides/geddes/examples/index.md
+        - Database: userguides/geddes/examples/database.md
+        - Web Server: userguides/geddes/examples/webserver.md
+        - R Shiny: userguides/geddes/examples/r-shiny.md
+      - Troubleshooting: userguides/geddes/troubleshooting.md
+      - Migration: userguides/geddes/migration/index.md
+    - Hammer:
+      - userguides/hammer/index.md
+      - Hammer Overview: userguides/hammer/overview.md
+      - Accounts: userguides/hammer/accounts.md
+      - File Storage and Transfer: userguides/hammer/storage.md
+      - Software: userguides/hammer/software.md
+      - Compiling Source Code: userguides/hammer/compile.md
+      - Running Jobs: userguides/hammer/run_jobs/index.md
+      - Frequently Asked Questions: userguides/hammer/faqs.md
+    - Rossmann: https://www.rcac.purdue.edu/knowledge/rossmann
+    - Weber: https://www.rcac.purdue.edu/knowledge/weber
+  - Storage User Guides:
+    - Data Depot:
+      - userguides/depot/index.md
+      - Overview: userguides/depot/overview.md
+      - File Storage and Transfer:
+        - userguides/depot/storage/index.md
+        - Archive and Compression: userguides/depot/storage/compress.md
+        - File Transfer: userguides/depot/storage/transfer.md
+        - Sharing Files: userguides/depot/storage/sharing.md
+      - Lost File Recovery:
+        - userguides/depot/recover/index.md
+        - flost Tool: userguides/depot/recover/flost.md
+        - Manual Browsing: userguides/depot/recover/manual.md
+        - Windows: userguides/depot/recover/windows.md
+        - Mac OS X: userguides/depot/recover/mac.md
+      - Access Permissions and Directories:
+        - userguides/depot/permissions/index.md
+        - Default Configuration: userguides/depot/permissions/default.md
+        - Common Scenarios: userguides/depot/permissions/scenarios.md
+        - Unix Groups: userguides/depot/permissions/unixgroups.md
+      - Frequently Asked Questions: userguides/depot/faqs.md
+    - Fortress:
+      - userguides/fortress/index.md
+      - Overview: userguides/fortress/overview.md
+      - Accounts: userguides/fortress/accounts.md
+      - File Storage and Transfer:
+        - userguides/fortress/storage/index.md
+        - Sharing Files: userguides/fortress/storage/sharing.md
+        - File Transfer: userguides/fortress/storage/transfer/index.md
+      - Frequently Asked Questions: userguides/fortress/faqs.md
+    - Box Research Lab Folder:
+      - userguides/boxfolder/index.md
+      - Overview: userguides/boxfolder/overview.md
+      - Accounts: userguides/boxfolder/accounts.md
+      - Frequently Asked Questions: userguides/boxfolder/faqs.md
+    - REED Folder:
+      - userguides/reedfolder/index.md
+      - Overview: userguides/reedfolder/overview.md
+      - Frequently Asked Questions: userguides/reedfolder/faqs.md
+  - RCAC Resources:
+    - RCAC Blogs:
+      - blog/index.md
+    - Software:
+      - software/index.md
+      - All Software: software/app_catalog.md
+      - Audio/Visualization: software/audio_visual_catalog.md
+      - Biocontainers: https://biocontainer-doc.readthedocs.io
+      - Bioinformatics: software/bioinformatics_catalog.md
+      - Compilers: software/compilers_catalog.md
+      - Computational Chemistry: software/chemistry_catalog.md
+      - Engineering: software/engineering_catalog.md
+      - Fluid Dynamics: software/fluid_dynamics_catalog.md
+      - Geoscience: software/geoscience_catalog.md
+      - Library: software/library_catalog.md
+      - Mathematics/Statistics: software/math_stat_catalog.md
+      - MPIs: software/mpi_catalog.md
+      - NGC Containers: software/ngc_catalog.md
+      - ROCm Containers: software/rocm_catalog.md
+      - Utilities: software/utilities_catalog.md
+      - Workflow: software/workflow_catalog.md
+    - Datasets:
+      - datasets/index.md
+      - All Datasets: datasets/dataset_catalog.md
+      - AI: datasets/ai.md
+      - Climate Model: datasets/climateModel.md
+      - Covariates: datasets/Covariates.md
+      - GeoAI: datasets/geoai.md
+      - Geospatial: datasets/geospatial.md
+      - Hydrological: datasets/hydrological.md
+      - Meteorological: datasets/meteorological.md
+    - Profilers:
+      - profilers/index.md
+      - NVIDIA Nsight Tools Overview: profilers/nvidia_nsight_tools_overview.md
+      - NVIDIA Nsight Tools on RCAC Clusters: profilers/nvidia_nsight_tools_on_rcac_clusters.md
+      - NVIDIA Nsight Systems: profilers/nvidia_nsight_systems.md
+      - AMD uProf: profilers/amduprof.md
+      - Intel VTune: profilers/vtune.md
+    - RCAC Workshops:
+      - workshops/index.md
+      - HPC Exchange:
+        - workshops/hpc_exchange/index.md
+        - Week 1:
+            - workshops/hpc_exchange/week1/index.md
+            - Setting up: workshops/hpc_exchange/week1/setup.md
+            - Access: workshops/hpc_exchange/week1/access.md
+            - Unix: workshops/hpc_exchange/week1/unix.md
+            - The Shell: workshops/hpc_exchange/week1/shell.md
+            - Commands: workshops/hpc_exchange/week1/commands.md
+            - Navigating Filesystems: workshops/hpc_exchange/week1/filesystem.md
+            - Editing Files: workshops/hpc_exchange/week1/editing.md
+            - Command Reference: workshops/hpc_exchange/week1/reference.md
+        - Week 2:
+            - workshops/hpc_exchange/week2/index.md
+            - What is a Cluster?: workshops/hpc_exchange/week2/what-is-a-cluster.md
+            - Purdue Clusters: workshops/hpc_exchange/week2/clusters.md
+            - Cluster Access: workshops/hpc_exchange/week2/access.md
+            - Cluster Applications: workshops/hpc_exchange/week2/applications.md
+            - Cluster Job Submission: workshops/hpc_exchange/week2/slurm-basics.md
+            - File Storage and Transfer: workshops/hpc_exchange/week2/storage-transfer.md
+        - Week 3:
+            - workshops/hpc_exchange/week3/index.md
+            - Scripting: workshops/hpc_exchange/week3/scripting.md
+
+            - Pipes: workshops/hpc_exchange/week3/pipes.md
+            - Managing processes: workshops/hpc_exchange/week3/processes.md
+            - Files & directories: workshops/hpc_exchange/week3/files-directories.md
+        - Week 4:
+            - workshops/hpc_exchange/week4/index.md
+            - Storage & transfers: workshops/hpc_exchange/week4/storage-transfer.md
+            - Job history: workshops/hpc_exchange/week4/job-history.md
+            - Utilization & monitoring: workshops/hpc_exchange/week4/utilization-monitoring.md
+            - Workload management: workshops/hpc_exchange/week4/workload-management.md
+            - Multinode & topology: workshops/hpc_exchange/week4/multinode-topology.md
+      - Genomics Exchange:
+        - workshops/genomics_exchange/index.md
+        - Fall 2026:
+            - workshops/genomics_exchange/fall2026/index.md
+            - "Session 1: Reproducible Genomics Kickoff": workshops/genomics_exchange/fall2026/session1/index.md
+            - "Session 2: Data Management for Biologists": workshops/genomics_exchange/fall2026/session2/index.md
+            - "Session 3: Nextflow Fundamentals": workshops/genomics_exchange/fall2026/session3/index.md
+            - "Session 4: Running nf-core Pipelines": workshops/genomics_exchange/fall2026/session4/index.md
+            - "Session 5: Script to pipeline": workshops/genomics_exchange/fall2026/session5/index.md
+            - "Session 6: nf-core on Open OnDemand": workshops/genomics_exchange/fall2026/session6/index.md
+            - "Session 7: R & Bioconductor on RCAC Clusters": workshops/genomics_exchange/fall2026/session7/index.md
+            - "Session 8: AI for Biologists": workshops/genomics_exchange/fall2026/session8/index.md
+        - Spring 2026 (archive):
+            - workshops/genomics_exchange/spring2026/index.md
+            - "Session 1: Introduction & HPC Orientation": workshops/genomics_exchange/spring2026/session1/index.md
+            - "Session 2: Project Organization": workshops/genomics_exchange/spring2026/session2/index.md
+            - "Session 3: R Data Wrangling": workshops/genomics_exchange/spring2026/session3/index.md
+            - "Session 4: Publication-Quality Plots": workshops/genomics_exchange/spring2026/session4/index.md
+            - "Session 5: Running Bioinformatics on RCAC": workshops/genomics_exchange/spring2026/session5/index.md
+            - "Session 6: QC for Genomics": workshops/genomics_exchange/spring2026/session6/index.md
+            - "Session 7: Reproducible Bioinformatics with Nextflow": workshops/genomics_exchange/spring2026/session7/index.md
+      - Hands-On Bioinformatics Workshops:
+        - workshops/hands_on_workshops/index.md
+        - RNA-seq: workshops/hands_on_workshops/rnaseq/index.md
+        - Single-Cell RNA-seq: workshops/hands_on_workshops/single-cell-rnaseq/index.md
+      - Getting Started with Bioinformatics and Computing at RCAC: workshops/hpc_orientation/index.md
+      - Anvil Kubernetes: workshops/kubernetes-tutorial.md
+      - Scientific Visualization with MatPlotLib:
+        - workshops/matplotlib/index.md
+        - Getting Started: workshops/matplotlib/introduction.md
+        - Our First Script: workshops/matplotlib/first_script.md
+        - The Second Script: workshops/matplotlib/sine_plot.md
+        - Advanced Plotting: workshops/matplotlib/adv_plots.md
+        - Types of Plots: workshops/matplotlib/plot_types.md
+        - Colormaps: workshops/matplotlib/colormaps.md
+        - Animations: workshops/matplotlib/animations.md
+        - Envision Center: workshops/matplotlib/env_cent.md
+  - RCAC Services:
+    - Life Sciences:
+      - lifesciences/index.md
+      - Getting Started:
+        - HPC Orientation for Biologists: lifesciences/guides/hpc-orientation.md
+        - Running Bioinformatics on RCAC: lifesciences/guides/running-bioinformatics.md
+        - Project Organization: lifesciences/guides/project-organization.md
+        - Reproducible Genomics: lifesciences/guides/reproducibility.md
+      - Guides:
+        - Nextflow and nf-core: lifesciences/guides/nextflow.md
+        - Nextflow on Gautschi: lifesciences/guides/nextflow-gautschi.md
+        - Downloading SRA Data: lifesciences/guides/sra-download.md
+        - Installing R Packages: lifesciences/guides/r-packages.md
+        - R Skills for Biological Data: lifesciences/guides/r-data-wrangling.md
+        - Publication-Quality Plots: lifesciences/guides/publication-quality-plots.md
+        - QC for Genomics: lifesciences/guides/qc-for-genomics.md
+        - Installing Perl Libraries: lifesciences/guides/perllib.md
+        - Optimizing Trinity: lifesciences/guides/trinity.md
+        - Transfer Data with iRODS: lifesciences/guides/icommands.md
+        - VS Code on RCAC: lifesciences/guides/vscode.md
+        - VISPR Visualization: lifesciences/guides/vispr.md
+        - Productivity Tips: lifesciences/guides/productivity-tips.md
+      - Tutorials:
+        - Gene Prediction:
+          - BRAKER3: lifesciences/tutorials/braker.md
+          - GeMoMa: lifesciences/tutorials/gemoma.md
+          - Helixer: lifesciences/tutorials/helixer.md
+        - Genome Assembly:
+          - HiFiasm (HiFi reads): lifesciences/tutorials/hifi-assembly.md
+          - Mitochondrial Genomes (MitoHiFi): lifesciences/tutorials/mitohifi.md
+        - Hi-C Analysis:
+          - Juicer: lifesciences/tutorials/juicer.md
+    - Agentic AI:
+      - agentic-ai/index.md
+      - Acceptable Use & Etiquette: agentic-ai/acceptable_use.md
+      - Best Practices & Limitations: agentic-ai/best_practices.md
+      - MCP Servers: agentic-ai/mcp_servers.md
+      - Running Agents:
+        - agentic-ai/running_agents/index.md
+        - On the Cluster (Login Nodes): agentic-ai/running_agents/on_cluster.md
+        - Local (over SSH): agentic-ai/running_agents/local.md
+      - Shared Context:
+        - agentic-ai/shared_context/index.md
+        - Context Files (/etc/agents.d): agentic-ai/shared_context/context_files.md
+        - Harness Settings (Retired): agentic-ai/shared_context/settings.md
+    - Purdue GenAI Studio:
+      - services/genai/index.md
+      - Chat Interface: services/genai/chat-interface.md
+      - Workspace: services/genai/workspace.md
+      - Hosted Models: services/genai/models.md
+      - Groups and Sharing: services/genai/groups.md
+      - API: services/genai/api.md
+      - Tool Calling: services/genai/tool-calling.md
+      - MCP Integration: services/genai/mcp-integration.md
+  - Contact us: contact.md
+  - FAQs: faqs.md
+
+extra:
+  social:
+  - icon: fontawesome/solid/rss
+    name: RCAC Blog RSS Feed
+    link: /feed_rss_created.xml
+  - icon: /fontawesome/regular/envelope
+    name: Get additional help from rcac-help
+    link: mailto:<rcac-help@purdue.edu>
+  - icon: fontawesome/brands/github
+    name: Check RCAC public GitHub page
+    link: https://github.com/PurdueRCAC
+  - icon: fontawesome/brands/x-twitter
+    name: Follow RCAC on X
+    link: https://x.com/PurdueRCAC
+  - icon: fontawesome/brands/discord
+    name: Join our Purdue RCD Community Discord channel
+    link: https://discord.gg/RmtKZmaQW9
+  - icon: /material/mailbox
+    name: Contact Us
+    link: /contact
+  org: Rosen Center for Advanced Computing
+  analytics:
+    provider: google
+    property: G-3D80JBWGP0  # Guangzhen's Google Analytics
+    feedback:
+      title: Page helpful? Submit your feedback if not.
+      ratings:
+        - icon: material/thumb-up-outline
+          name: This page was helpful
+          data: 1
+          note: >-
+            Thanks for your feedback!
+        - icon: material/thumb-down-outline
+          name: This page could be improved
+          data: 0
+          note: >-
+            Thanks for your feedback! Help us improve this page by using our <a href="https://github.com/PurdueRCAC/RCAC-Docs/issues/new?labels=feedback&title=[Feedback]:%20&body=>%20**Page%20Affected:**%20https://docs.rcac.purdue.edu{url}%0A>%20Please%20describe%20the%20issue%20you%20found%20on%20this%20page.%0A%0A" target="_blank" rel="noopener">feedback form</a>.
+
+markdown_extensions:
+  - toc:
+      permalink: true
+  - tables
+  - attr_list
+  - md_in_html
+  - admonition
+  - pymdownx.details
+  - pymdownx.blocks.caption
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.snippets
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+      linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+# # Adding share buttons
+# hooks:
+#   - hooks/socialmedia.py
+
+# Copyright
+copyright: Copyright &copy; 2026 Rosen Center for Advanced Computing

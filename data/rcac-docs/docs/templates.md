@@ -1,0 +1,214 @@
+---
+hide:
+  - footer
+search:
+  exclude: true
+host: anvil.rcac.purdue.edu
+draft: true
+# icon: /fontawesome/regular/home
+---
+
+## Macros
+I defined the following global variables in `mkdocs.yml`:
+``` yml
+extra:
+    org: Rosen Center for Advanced Computing
+```
+and the local variable in the header of current md file:
+```
+host: anvil.rcac.purdue.edu
+```
+
+So I can use both variables: `org` and `host` in macros as below:
+=== "SSH to Anvil"
+    How to ssh to Anvil:
+    ``` bash
+    ssh username@{{ host }}
+    ```
+
+=== "SSH to other HPC clusters"
+    Please refer to user guides from {{ org }}'s website.
+
+## Snippet
+In general, there are two ways to use snippets within Mkdocs.
+- First, if the snippet can be applied without any content change, they can be used directly with `pymdownx.snippets` extension.
+- Second, if the snippet will include variables (e.g. specific cluster name), a combination of macro + snippet is required.
+
+### 1. Use entire snippets
+
+#### Include snippet section (part of snippet)
+--8<-- "docs/snippets/app.md:python"
+--8<-- "docs/snippets/app.md:matlab"
+
+
+### 2. Macros + snippets
+
+The snippets will have to be defined in `main.py` under the same directory with `mkdocs.yml`.
+??? example "main.py"
+    ```` python
+    # main.py
+
+    @env.macro
+    def ssh_keys_snippet(resource):
+        return f"""
+### SSH Keys general overview
+
+To connect to {resource.title()} using SSH keys, you must follow three high-level steps:
+...
+"""
+    
+    @env.macro
+    def ssh_x11_snippet(resource):
+        return f"""
+SSH supports tunneling of X11 (X-Windows). If you have an X11 server running on your local machine, you may use X11 applications on remote systems and have their graphical displays appear on your local machine. These X11 connections are tunneled and encrypted automatically by your SSH client.
+...
+
+    ````
+
+Then the following local variables are set with `Jinja` syntax.
+
+``` none
+{% raw %}
+{% set resource = "gautschi" %}
+{% endraw %}
+```
+
+Finally, the snippet functions can be called with
+
+``` none
+{% raw %}
+{{ ssh_keys_snippet(resource) }}
+{{ ssh_x11_snippet(resource) }}
+{% endraw %}
+```
+
+And it will look like:
+
+{% set resource = "gautschi" %}
+
+{{ ssh_keys_snippet(resource) }}
+{{ ssh_x11_snippet(resource) }}
+
+
+## Use admonitions
+
+!!! note "This is a note"
+    Welcome!
+
+!!! note "This is a note"
+    Welcome!
+    !!! note "Inner Note"
+        Welcome again!
+
+??? note "This is a collapsible note"
+    Welcome to RCAC documentation!
+
+!!! abstract "Abstract"
+    This is an abstract!
+
+!!! tip "Tip"
+    This is a tip!
+
+!!! info "Info"
+    This is an info!
+
+!!! success "Success"
+    This is a success!
+
+!!! failure "Fail"
+    Failed!
+
+!!! danger "Danger"
+    Danger!
+
+!!! warning "warning"
+    Warning!
+
+!!! question "Question"
+    This is a question.
+
+!!! quote "Quote"
+    This is a quote.
+
+!!! example "Example"
+    This is an example.
+
+## Syntax Highlighting
+Specific lines can be highlighted by passing the line numbers to the `hl_lines` argument placed right after the language shortcode.
+
+### Highlighting specific lines
+
+=== "Lines"
+
+    ```` markdown title="Code block with highlighted lines"
+    ``` py hl_lines="2 3"
+    def bubble_sort(items):
+        for i in range(len(items)):
+            for j in range(len(items) - 1 - i):
+                if items[j] > items[j + 1]:
+                    items[j], items[j + 1] = items[j + 1], items[j]
+    ```
+    ````
+
+    <div class="result" markdown>
+
+    ``` py linenums="1" hl_lines="2 3"
+    def bubble_sort(items):
+        for i in range(len(items)):
+            for j in range(len(items) - 1 - i):
+                if items[j] > items[j + 1]:
+                    items[j], items[j + 1] = items[j + 1], items[j]
+    ```
+
+    </div>
+
+=== "Line ranges"
+
+    ```` markdown title="Code block with highlighted line range"
+    ``` py hl_lines="3-5"
+    def bubble_sort(items):
+        for i in range(len(items)):
+            for j in range(len(items) - 1 - i):
+                if items[j] > items[j + 1]:
+                    items[j], items[j + 1] = items[j + 1], items[j]
+    ```
+    ````
+
+    <div class="result" markdown>
+
+    ``` py linenums="1" hl_lines="3-5"
+    def bubble_sort(items):
+        for i in range(len(items)):
+            for j in range(len(items) - 1 - i):
+                if items[j] > items[j + 1]:
+                    items[j], items[j + 1] = items[j + 1], items[j]
+    ```
+
+    </div>
+
+### Highlighting inline code blocks
+When `InlineHilite` is enabled, syntax highlighting can be applied to inline code blocks by prefixing them with a shebang, i.e. `#!`, directly followed by the corresponding language shortcode.
+
+=== "Python"
+
+    ``` markdown title="Inline code block"
+    The `#!python range()` function is used to generate a sequence of numbers.
+    ```
+
+    <div class="result" markdown>
+
+    The `#!python range()` function is used to generate a sequence of numbers.
+
+    </div>
+
+=== "Bash"
+
+    ``` markdown title="Bash inline code block"
+    The `#!bash ls` function is used to list files under current folder.
+    ```
+
+    <div class="result" markdown>
+
+     The `#!bash ls` function is used to list files under current folder.
+
+    </div>

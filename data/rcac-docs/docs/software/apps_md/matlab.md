@@ -1,0 +1,35 @@
+# matlab
+
+[Back to application catalog](../app_catalog.md)
+
+## Description
+
+MATLAB (MATrix LABoratory) is a multi-paradigm numerical computing environment and programming language used widely in science and engineering.
+
+## Homepage
+
+[https://www.mathworks.com/products/matlab.html](https://www.mathworks.com/products/matlab.html)
+
+## Available Versions on RCAC Clusters
+
+|Cluster|Versions|
+|---|---|
+**ANVIL**|R2020b (D), R2021b, R2022a, R2023a, R2026a
+**BELL**|R2024a (D)
+**GAUTSCHI**|R2024a, R2026a
+**GILBRETH**|R2024a, R2026a
+**NEGISHI**|R2021b, R2022a (D), R2023a, R2024b, R2026a
+**SCHOLAR**|R2024a (D), R2026a
+
+(D): Default Module
+
+## Module
+
+You can load the module by:
+
+```bash
+module load matlab
+```
+
+!!! note "Note for using `matlab`"
+    Run `module spider matlab` beforehand to check if this version requires any prerequisite modules.

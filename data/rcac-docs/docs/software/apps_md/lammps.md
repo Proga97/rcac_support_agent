@@ -1,0 +1,33 @@
+# lammps
+
+[Back to application catalog](../app_catalog.md)
+
+## Description
+
+LAMMPS stands for Large-scale Atomic/Molecular Massively Parallel Simulator.
+
+## Homepage
+
+[https://www.lammps.org/](https://www.lammps.org/)
+
+## Available Versions on RCAC Clusters
+
+|Cluster|Versions|
+|---|---|
+**ANVIL**|20210310-kokkos, 20210310, 20230802, 20240829, 20240829.1, 20250722.4
+**BELL**|20240829.1
+**GAUTSCHI**|20240829
+**GILBRETH**|20240829
+**NEGISHI**|20220623
+**SCHOLAR**|20240829
+
+## Module
+
+You can load the module by:
+
+```bash
+module load lammps
+```
+
+!!! note "Note for using `lammps`"
+    Run `module spider lammps` beforehand to check if this version requires any prerequisite modules.
