@@ -61,6 +61,7 @@ def _log_call(result: ChatResult, question_preview: str) -> None:
         "output_tokens": result.output_tokens,
         "latency_ms": result.latency_ms,
         "question": question_preview,
+        "answer": result.text[:120],
     }
     with open(config.LOG_DIR / "llm_calls.jsonl", "a", encoding="utf-8") as log:
         log.write(json.dumps(record) + "\n")
